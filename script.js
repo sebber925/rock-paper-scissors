@@ -3,14 +3,14 @@ const paper = "Paper";
 const scissors = "Scissors";
 let computerScore = 0;
 let humanScore = 0;
-let computerChoice = Math.floor(Math.random() * 3);
 
     function getComputerChoice() {
+        const computerChoice = Math.floor(Math.random() * 3);
         if (computerChoice === 0) {
             return rock;
         } else if (computerChoice === 1) {
             return paper;
-        } else if (computerChoice === 2) {
+        } else {
             return scissors;
         };
     };
@@ -24,6 +24,8 @@ let computerChoice = Math.floor(Math.random() * 3);
             return paper;
         } else if (humanChoice.toLowerCase() === 'scissors') {
             return scissors;
+        } else {
+            return 'Invalid option';
         }
     };
  
@@ -32,7 +34,7 @@ let computerChoice = Math.floor(Math.random() * 3);
             console.log("You lose! Paper beats rock!");
             computerScore++;
         } else if ((humanChoice === rock) && (computerChoice === scissors)) {      
-            console.log("You win! Rock beats paper!");
+            console.log("You win! Rock beats scissors!");
             humanScore++; 
         } else if ((humanChoice === rock) && (computerChoice === rock)) {      
             console.log("It's a tie!");
@@ -42,7 +44,7 @@ let computerChoice = Math.floor(Math.random() * 3);
             console.log("You lose! Scissors beats paper!");
             computerScore++; 
         } else if ((humanChoice === paper) && (computerChoice === rock)) {      
-            console.log("You win! Rock beats paper!");
+            console.log("You win! Paper beats rock!");
             humanScore++;    
         } else if ((humanChoice === scissors) && (computerChoice === paper)) {      
             console.log("You win! Scissors beats paper!");
@@ -55,15 +57,22 @@ let computerChoice = Math.floor(Math.random() * 3);
     }
 }
 
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
+    function playGame() {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        console.log(`You chose: ${humanSelection}`);
+        console.log(`Computer chose: ${computerSelection}`);
 
-    console.log(playRound(humanSelection, computerSelection));
+        playRound(humanSelection, computerSelection);
+        console.log(`Score: You - ${humanScore} | Computer: ${computerScore}`);
 
-    // function playGame() {
-    //     playRound(humanSelection, computerSelection);
-    // }
+        if (computerScore === 3) {
+            console.log(`You lost!`);
+        } else if (humanScore === 3) {
+            console.log(`You won!`);
+        }
+    }
 
-
-// I want a ComputerChoice, where the result gets chosen random out of 3 options: Rock, Paper, Scissors
-// Then I want a human input, fill in a prompt where you choose an option.
+    while (computerScore < 3 && humanScore < 3) {
+        playGame();
+    };
