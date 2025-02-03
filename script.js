@@ -16,7 +16,7 @@ let humanScore = 0;
     };
     
     function getHumanChoice() {
-        let humanChoice = prompt("Rock, paper, scissors?");
+        let humanChoice = prompt("Rock, paper, scissors? (Open your console!)");
 
         if (humanChoice.toLowerCase() === 'rock') {
             return rock;
